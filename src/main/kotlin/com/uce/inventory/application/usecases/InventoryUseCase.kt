@@ -10,6 +10,7 @@ import com.uce.inventory.shared.enums.TransactionType
 import com.uce.inventory.shared.errors.RepositoryResult
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 class InventoryUseCase(
   private val _productRepository: ProductRepository,
@@ -86,6 +87,12 @@ class InventoryUseCase(
 
 
   suspend fun generateInventoryReport(): InventoryReport = coroutineScope {
+    println(
+      "Calculando inventory report..."
+    )
+
+    delay(3000)
+    
     val deferredProducts = async { _productRepository.findAll() }
 
     val deferredTransactions = async { _transactionRepository.findAll() }
